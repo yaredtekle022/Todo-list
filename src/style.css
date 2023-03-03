@@ -54,12 +54,11 @@ h4 {
   margin-bottom: 0;
 }
 
-
-.lineThrough{
+.lineThrough {
   text-decoration: line-through;
-  color : #ccc;
+  color: #ccc;
 }
 
-.fa-check-circle{
-  color:#6eb200;
+.fa-check-circle {
+  color: #6eb200;
 }
