@@ -62,3 +62,29 @@ h4 {
 .fa-check-circle {
   color: #6eb200;
 }
+
+.erase-section {
+  display: flex;
+  justify-content: center;
+}
+
+.erase {
+  height: 50px;
+  font-size: 20px;
+}
+
+#input {
+  width: 80%;
+  font-size: 25px;
+  margin-left: 25px;
+}
+
+.input-button {
+  display: flex;
+}
+
+.left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

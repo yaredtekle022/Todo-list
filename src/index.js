@@ -1,90 +1,87 @@
-const list = document.getElementById('list');
-const input = document.getElementById('input');
+import { list, input, addBtn } from './modules/variables.js';
+import completeToDo from './modules/complete.js';
+import addToDo from './modules/add.js';
 
-// classes name
-const CHECK = 'fa-check-circle';
-const UNCHECK = 'fa-circle-thin';
-const LINE_THROUGH = 'lineThrough';
+let LIST = JSON.parse(localStorage.getItem('TODO')) || [];
+let id = 0;
 
-let LIST; let
-  id;
-
-const data = localStorage.getItem('TODO');
-function addToDo(toDo, id, done, trash) {
-  if (trash) { return; }
-
-  const DONE = done ? CHECK : UNCHECK;
-  const LINE = done ? LINE_THROUGH : '';
-
-  const text = `<li class="item">
-<div class="ip">
-<i class = "fa ${DONE} complete" job = "complete" id ="${id}"> </i>
-<p class = "text ${LINE}">${toDo} </p>
-</div>
-<i class = "fa fa-trash-o de" job = "delete" id="${id}"</i>
-</li>`;
-
-  const position = 'beforeend';
-  list.insertAdjacentHTML(position, text);
-}
-
-function loadList(array) {
-  array.forEach((item) => {
-    addToDo(item.name, item.id, item.done, item.trash);
-  });
-}
-
-if (data) {
-  LIST = JSON.parse(data);
-  id = LIST.length;
-  loadList(LIST);
-} else {
-  LIST = [];
-  id = 0;
-}
-
-document.addEventListener('keyup', (event) => {
-  if (event.keyCode === 13) {
-    const toDo = input.value;
-
-    if (toDo) {
-      addToDo(toDo, id, false, false);
-      LIST.push(
-        {
-          name: toDo,
-          id,
-          done: false,
-          trash: false,
-
-        },
-      );
-      localStorage.setItem('TODO', JSON.stringify(LIST));
-
-      id += 1;
-    }
-    input.value = '';
-  }
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', () => {
+  localStorage.clear();
+  window.location.reload();
 });
-function completeToDo(element) {
-  element.classList.toggle(CHECK);
-  element.classList.toggle(UNCHECK);
-  element.parentNode.querySelector('.text').classList.toggle(LINE_THROUGH);
-  LIST[element.id].done = !LIST[element.id].done;
-}
 
-function removeToDo(element) {
+const erase = document.querySelector('.erase');
+erase.addEventListener('click', () => {
+  localStorage.clear();
+  window.location.reload();
+});
+
+const myData = JSON.parse(localStorage.getItem('TODO'));
+
+const rerender = (myList) => {
+  if (myList) {
+    const container = document.createElement('div');
+    myList.forEach((item) => {
+      container.innerHTML += `<li class="item">
+              <div class="left">
+              <i class="fa-regular fa-square" job="complete" id=${item.id}></i>
+              <p class="text">${item.todo}</p>
+              </div>
+              <i class="fa-solid fa-trash" job="delete" id=${id}></i>
+            </li>`;
+      list.append(container);
+    });
+  }
+};
+
+rerender(myData);
+
+addBtn.addEventListener('click', () => {
+  const todo = input.value;
+
+  if (todo) {
+    addToDo(todo, id, false, false);
+    if (myData) {
+      LIST = myData;
+    }
+    LIST.push({
+      todo,
+      id: LIST.length,
+      done: false,
+      trash: false,
+    });
+
+    id += 1;
+    localStorage.setItem('TODO', JSON.stringify(LIST));
+  }
+
+  input.value = '';
+});
+const removeToDo = (element, elemenId) => {
   element.parentNode.parentNode.removeChild(element.parentNode);
-  LIST[element.id].trash = true;
-  localStorage.setItem('TODO', JSON.stringify(LIST));
-}
+  LIST[elemenId].trash = true;
+  const t = localStorage.getItem('TODO');
+  const parsedData = JSON.parse(t);
+  const data = parsedData[elemenId].id;
+
+  const currentList = parsedData.filter((item) => item.id !== data);
+  currentList.forEach((element, index) => {
+    element.id = index;
+  });
+
+  LIST = currentList;
+  window.location.reload();
+  localStorage.setItem('TODO', JSON.stringify(currentList));
+};
 
 list.addEventListener('click', (event) => {
   const element = event.target;
+  const elemenId = event.target.id;
   const elementJob = element.attributes.job.value;
   if (elementJob === 'complete') {
-    completeToDo(element);
+    completeToDo(element, elemenId);
   } else if (elementJob === 'delete') {
-    removeToDo(element);
+    removeToDo(element, elemenId);
   }
-  localStorage.setItem('TODO', JSON.stringify(LIST));
 });
