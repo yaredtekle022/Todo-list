@@ -32,11 +32,6 @@ body {
   margin-top: 0;
 }
 
-.erase-section {
-  display: flex;
-  justify-content: center;
-}
-
 .text {
   margin-top: 10px;
 }
@@ -59,8 +54,12 @@ h4 {
   margin-bottom: 0;
 }
 
-.erase {
-  font-size: 25px;
-  margin: 25px;
-  padding: 20px;
+
+.lineThrough{
+  text-decoration: line-through;
+  color : #ccc;
+}
+
+.fa-check-circle{
+  color:#6eb200;
 }
