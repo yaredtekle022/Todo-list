@@ -1,4 +1,3 @@
-const clear = document.querySelector('.clear');
 const list = document.getElementById('list');
 const input = document.getElementById('input');
 
@@ -10,26 +9,12 @@ const LINE_THROUGH = 'lineThrough';
 let LIST; let
   id;
 
-// add todo function
-
+const data = localStorage.getItem('TODO');
+function addToDo(toDo, id, done, trash) {
+  if (trash) { return; }
 
   const DONE = done ? CHECK : UNCHECK;
   const LINE = done ? LINE_THROUGH : '';
-
-  function loadList(array) {
-    array.forEach((item) => {
-      addToDo(item.name, item.id, item.done, item.trash);
-    });
-  }
-  const data = localStorage.getItem('TODO');
-  if (data) {
-    LIST = JSON.parse(data);
-    id = LIST.length;
-    loadList(LIST);
-  } else {
-    LIST = [];
-    id = 0;
-  }
 
   const text = `<li class="item">
 <div class="ip">
@@ -41,10 +26,25 @@ let LIST; let
 
   const position = 'beforeend';
   list.insertAdjacentHTML(position, text);
+}
 
+function loadList(array) {
+  array.forEach((item) => {
+    addToDo(item.name, item.id, item.done, item.trash);
+  });
+}
+
+if (data) {
+  LIST = JSON.parse(data);
+  id = LIST.length;
+  loadList(LIST);
+} else {
+  LIST = [];
+  id = 0;
+}
 
 document.addEventListener('keyup', (event) => {
-  if (event.keyCode == 13) {
+  if (event.keyCode === 13) {
     const toDo = input.value;
 
     if (toDo) {
@@ -60,7 +60,7 @@ document.addEventListener('keyup', (event) => {
       );
       localStorage.setItem('TODO', JSON.stringify(LIST));
 
-      id+=1;
+      id += 1;
     }
     input.value = '';
   }
@@ -88,11 +88,3 @@ list.addEventListener('click', (event) => {
   }
   localStorage.setItem('TODO', JSON.stringify(LIST));
 });
-
-clear.addEventListener('click', () => {
-  localStorage.clear();
-  localStorage.reload();
-});
-
-function addToDo(toDo, id, done, trash) {
-  if (trash) { return; }
