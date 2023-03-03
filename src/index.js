@@ -1,3 +1,4 @@
+const clear = document.querySelector('.clear');
 const list = document.getElementById('list');
 const input = document.getElementById('input');
 
@@ -10,8 +11,7 @@ let LIST; let
   id;
 
 // add todo function
-function addToDo(toDo, id, done, trash) {
-  if (trash) { return; }
+
 
   const DONE = done ? CHECK : UNCHECK;
   const LINE = done ? LINE_THROUGH : '';
@@ -41,10 +41,10 @@ function addToDo(toDo, id, done, trash) {
 
   const position = 'beforeend';
   list.insertAdjacentHTML(position, text);
-}
+
 
 document.addEventListener('keyup', (event) => {
-  if (event.keyCode === 13) {
+  if (event.keyCode == 13) {
     const toDo = input.value;
 
     if (toDo) {
@@ -60,7 +60,7 @@ document.addEventListener('keyup', (event) => {
       );
       localStorage.setItem('TODO', JSON.stringify(LIST));
 
-      id += 1;
+      id+=1;
     }
     input.value = '';
   }
@@ -88,3 +88,11 @@ list.addEventListener('click', (event) => {
   }
   localStorage.setItem('TODO', JSON.stringify(LIST));
 });
+
+clear.addEventListener('click', () => {
+  localStorage.clear();
+  localStorage.reload();
+});
+
+function addToDo(toDo, id, done, trash) {
+  if (trash) { return; }
