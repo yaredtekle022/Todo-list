@@ -88,19 +88,3 @@ list.addEventListener('click', (event) => {
     removeToDo(element, elemenId);
   }
 });
-
-const edit = document.querySelector(".edit");
-const text = document.querySelector('.text')
-
-edit.addEventListener('click', (event) => {
-  const editInputElement = '<input />'
-  text.outerHTML = editInputElement
-  edit.outerHTML = '<button class="save">save</button>'
- });
-
- const editInput = document.getElementsByClassName('save')
- 
-editInput.addEventListener('click', (event) => {
-   text.outerHTML =  ' <p class="text">wq</p>'
-  edit.innerHTML = edit
-});
