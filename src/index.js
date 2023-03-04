@@ -88,10 +88,3 @@ list.addEventListener('click', (event) => {
     removeToDo(element, elemenId);
   }
 });
-
-const edit = document.querySelector('.edit')
-edit.addEventListener('click', (event) => {
-  console.log('hello')
-});
-
-
