@@ -13,10 +13,12 @@ clear.addEventListener('click', () => {
 
 const erase = document.querySelector('.erase');
 erase.addEventListener('click', () => {
-  localStorage.clear();
+  const updateLocal = JSON.parse(localStorage.getItem('TODO'));
+
+  const currentList = updateLocal.filter((item) => item.done === false);
+  localStorage.setItem('TODO', JSON.stringify(currentList));
   window.location.reload();
 });
-
 const myData = JSON.parse(localStorage.getItem('TODO'));
 
 const rerender = (myList) => {
@@ -26,8 +28,9 @@ const rerender = (myList) => {
       container.innerHTML += `<li class="item">
               <div class="left">
               <i class="fa-regular fa-square" job="complete" id=${item.id}></i>
-              <p class="text">${item.todo}</p>
+              <p class="text" id=${item.id}>${item.todo}</p>
               </div>
+              <p class = "edit">Edit</p>
               <i class="fa-solid fa-trash" job="delete" id=${id}></i>
             </li>`;
       list.append(container);
@@ -85,3 +88,10 @@ list.addEventListener('click', (event) => {
     removeToDo(element, elemenId);
   }
 });
+
+const edit = document.querySelector('.edit')
+edit.addEventListener('click', (event) => {
+  console.log('hello')
+});
+
+

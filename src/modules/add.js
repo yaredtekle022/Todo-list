@@ -13,8 +13,9 @@ const addToDo = (todo, id, done, trash) => {
   const item = `<li class="item">
                 <div class="left">
                 <i class="fa-regular ${Done}" job="complete" id=${id}${id}></i>
-                <p class="text ${Line}">${todo}</p>
+                <p class="text ${Line}" id=${todo}>${todo}</p>
                 </div>
+                <p class = "edit">Edit</p>
                 <i class="fa-solid fa-trash" job="delete" id=${id}></i>
               </li>`;
 
