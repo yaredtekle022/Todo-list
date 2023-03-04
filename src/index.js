@@ -30,7 +30,7 @@ const rerender = (myList) => {
               <i class="fa-regular fa-square" job="complete" id=${item.id}></i>
               <p class="text" id=${item.id}>${item.todo}</p>
               </div>
-              <p class = "edit">Edit</p>
+              <button class="edit" id=${id}${id}>Edit</button>
               <i class="fa-solid fa-trash" job="delete" id=${id}></i>
             </li>`;
       list.append(container);
@@ -87,4 +87,20 @@ list.addEventListener('click', (event) => {
   } else if (elementJob === 'delete') {
     removeToDo(element, elemenId);
   }
+});
+
+const edit = document.querySelector(".edit");
+const text = document.querySelector('.text')
+
+edit.addEventListener('click', (event) => {
+  const editInputElement = '<input />'
+  text.outerHTML = editInputElement
+  edit.outerHTML = '<button class="save">save</button>'
+ });
+
+ const editInput = document.getElementsByClassName('save')
+ 
+editInput.addEventListener('click', (event) => {
+   text.outerHTML =  ' <p class="text">wq</p>'
+  edit.innerHTML = edit
 });

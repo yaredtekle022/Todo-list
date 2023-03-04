@@ -15,8 +15,8 @@ const addToDo = (todo, id, done, trash) => {
                 <i class="fa-regular ${Done}" job="complete" id=${id}${id}></i>
                 <p class="text ${Line}" id=${todo}>${todo}</p>
                 </div>
-                <p class = "edit">Edit</p>
-                <i class="fa-solid fa-trash" job="delete" id=${id}></i>
+                <button class="edit" id=${id}${id}>Edit</button>
+                  <i class="fa-solid fa-trash" job="delete" id=${id}></i>
               </li>`;
 
   list.insertAdjacentHTML(position, item);
