@@ -2,7 +2,7 @@
 
 
 <div align="center">
-  <h3><b>ToDo list</b></h3>
+  <h3><b>add remove ToDo list</b></h3>
 
 </div>
 
@@ -26,7 +26,7 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [ToDo list] <a name="about-project"></a>
+# 📖 [add remove ToDo list] <a name="about-project"></a>
 
 > ToDo list
 
@@ -44,8 +44,8 @@
 
 > Describe between 1-3 key features of the application.
 
-- **Book List Section**
-- **Add Book Form**
+- **add book**
+- **remove book**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,9 +104,10 @@ Clone this repository to your desired folder:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> Describe 1 - 3 features you will add to the project.
 
-- [ ] **todo list**
+- [ ] **add remove ToDo list**
+      **clear all todo list**
+      **edit todo list**
 - [ ] 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
