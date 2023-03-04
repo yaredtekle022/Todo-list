@@ -13,10 +13,12 @@ clear.addEventListener('click', () => {
 
 const erase = document.querySelector('.erase');
 erase.addEventListener('click', () => {
-  localStorage.clear();
+  const updateLocal = JSON.parse(localStorage.getItem('TODO'));
+
+  const currentList = updateLocal.filter((item) => item.done === false);
+  localStorage.setItem('TODO', JSON.stringify(currentList));
   window.location.reload();
 });
-
 const myData = JSON.parse(localStorage.getItem('TODO'));
 
 const rerender = (myList) => {
@@ -26,8 +28,9 @@ const rerender = (myList) => {
       container.innerHTML += `<li class="item">
               <div class="left">
               <i class="fa-regular fa-square" job="complete" id=${item.id}></i>
-              <p class="text">${item.todo}</p>
+              <p class="text" id=${item.id}>${item.todo}</p>
               </div>
+              <button class="edit" id=${id}${id}>Edit</button>
               <i class="fa-solid fa-trash" job="delete" id=${id}></i>
             </li>`;
       list.append(container);
@@ -77,6 +80,38 @@ const removeToDo = (element, elemenId) => {
 
 list.addEventListener('click', (event) => {
   const element = event.target;
+  const elemenId = event.target.id;
+  const elementJob = element.attributes.job.value;
+  if (elementJob === 'complete') {
+    completeToDo(element, elemenId);
+  } else if (elementJob === 'delete') {
+    removeToDo(element, elemenId);
+  }
+});
+
+const edit = document.querySelector('.edit');
+const text = document.querySelector('.text');
+
+edit.addEventListener('click', (event) => {
+  const element = event.target;
+  const editInputElement = '<input />';
+  text.outerHTML = editInputElement;
+  edit.outerHTML = '<button class="save">save</button>';
+  const elemenId = event.target.id;
+  const elementJob = element.attributes.job.value;
+  if (elementJob === 'complete') {
+    completeToDo(element, elemenId);
+  } else if (elementJob === 'delete') {
+    removeToDo(element, elemenId);
+  }
+});
+
+const editInput = document.getElementsByClassName('save');
+
+editInput.addEventListener('click', (event) => {
+  const element = event.target;
+  text.outerHTML = ' <p class="text">wq</p>';
+  edit.innerHTML = edit;
   const elemenId = event.target.id;
   const elementJob = element.attributes.job.value;
   if (elementJob === 'complete') {
