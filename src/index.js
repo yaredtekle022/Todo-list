@@ -3,8 +3,6 @@ import completeToDo from './modules/complete.js';
 import addToDo from './modules/add.js';
 
 let LIST = JSON.parse(localStorage.getItem('TODO')) || [];
-const editTodoId = -1;
-
 let id = 0;
 
 const clear = document.querySelector('.clear');
